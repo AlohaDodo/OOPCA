@@ -2,9 +2,10 @@ package MainApp;
 
 import java.util.List;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class AppMain {
-   //private MySqlAanimaDao animalDAO = new MySQLExpenseDao();
+   //private MySqlAnimalDao animalDAO = new MySQLExpenseDao();
     private Scanner keyboard = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -25,8 +26,24 @@ public class AppMain {
 
             int input = keyboard.nextInt();
             keyboard.nextLine();
-           
 
+        /*
+        switch(input){
+            case 1 -> getAllAnimals();
+            case 2 ->  getAnimalById();
+            case 3 -> deleteAnimal();
+            case 4 -> addAnimal();
+            case 5 -> updateAnimal();
+            case 6 -> findAnimalByFilter();
+            case 7 -> {
+                System.out.println("Finished");
+                return;
+            }
+            default -> System.out.println("Invalid input");
+        }
+         */
     }
 }
+
+//input the methods here:
 }
