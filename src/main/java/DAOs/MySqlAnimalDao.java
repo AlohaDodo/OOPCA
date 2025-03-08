@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySqlUserDao extends MySqlDao {
+public class MySqlAnimalDao extends MySqlDao {
 
     // Create a new animal record
     public void createAnimal(Animal animal) throws SQLException {
