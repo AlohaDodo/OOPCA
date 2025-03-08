@@ -12,8 +12,9 @@ public class Animal {
     private String health;
     private LocalDate admitted;
     private String gender;
+    private int donorId;
 
-    public Animal(int animalId, String type, String breed, String name, int age, boolean neutered, String health, LocalDate admitted, String gender) {
+    public Animal(int animalId, String type, String breed, String name, int age, boolean neutered, String health, LocalDate admitted, String gender, int donorId) {
         this.animalId = animalId;
         this.type = type;
         this.breed = breed;
@@ -23,6 +24,7 @@ public class Animal {
         this.health = health;
         this.admitted = admitted;
         this.gender = gender;
+        this.donorId = donorId;
     }
 
     public Animal() {
@@ -100,6 +102,10 @@ public class Animal {
         this.gender = gender;
     }
 
+    public void setdonorId (int donorId){
+        this.donorId = donorId;
+    }
+
     @Override
     public String toString() {
         return "Animal{" +
@@ -112,6 +118,7 @@ public class Animal {
                 ", health='" + health + '\'' +
                 ", admitted=" + admitted +
                 ", gender='" + gender + '\'' +
+                ", donorId=" + donorId +
                 '}';
     }
 }
