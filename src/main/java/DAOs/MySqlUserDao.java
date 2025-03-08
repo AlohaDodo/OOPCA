@@ -10,8 +10,8 @@ public class MySqlUserDao extends MySqlDao {
 
     // Create a new animal record
     public void createAnimal(Animal animal) throws SQLException {
-        String sql = "INSERT INTO animals (animal_id, type, breed, name, age, neutered, health, admitted, gender) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO animals (animal_id, type, breed, name, age, neutered, health, admitted, gender, donorId) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -25,6 +25,7 @@ public class MySqlUserDao extends MySqlDao {
             pstmt.setString(7, animal.getHealth());
             pstmt.setDate(8, Date.valueOf(animal.getAdmitted()));
             pstmt.setString(9, animal.getGender());
+            pstmt.setInt(10, animal.getDonorId());
 
             pstmt.executeUpdate();
         }
@@ -108,7 +109,8 @@ public class MySqlUserDao extends MySqlDao {
                 rs.getBoolean("neutered"),
                 rs.getString("health"),
                 rs.getDate("admitted").toLocalDate(),
-                rs.getString("gender")
+                rs.getString("gender"),
+                rs.getInt("donorId")
         );
     }
 }

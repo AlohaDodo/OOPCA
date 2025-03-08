@@ -102,8 +102,12 @@ public class Animal {
         this.gender = gender;
     }
 
-    public void setdonorId (int donorId){
+    public void setDonorId(int donorId) {
         this.donorId = donorId;
+    }
+
+    public int getDonorId() {
+        return donorId;
     }
 
     @Override
@@ -121,4 +125,6 @@ public class Animal {
                 ", donorId=" + donorId +
                 '}';
     }
+
+
 }
