@@ -10,8 +10,8 @@ public class MySqlAnimalDao extends MySqlDao {
 
     // Create a new animal record
     public void createAnimal(Animal animal) throws SQLException {
-        String sql = "INSERT INTO animal (animal_id, type, breed, name, age, neutered, health, admitted, gender, donorId) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO animal (animal_id, type, breed, name, age, weight, neutered, health, admitted, gender, donorId) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -21,11 +21,12 @@ public class MySqlAnimalDao extends MySqlDao {
             pstmt.setString(3, animal.getBreed());
             pstmt.setString(4, animal.getName());
             pstmt.setInt(5, animal.getAge());
-            pstmt.setBoolean(6, animal.isNeutered());
-            pstmt.setString(7, animal.getHealth());
-            pstmt.setDate(8, Date.valueOf(animal.getAdmitted()));
-            pstmt.setString(9, animal.getGender());
-            pstmt.setInt(10, animal.getDonorId());
+            pstmt.setFloat(6, animal.getWeight());
+            pstmt.setBoolean(7, animal.isNeutered());
+            pstmt.setString(8, animal.getHealth());
+            pstmt.setDate(9, Date.valueOf(animal.getAdmitted()));
+            pstmt.setString(10, animal.getGender());
+            pstmt.setInt(11, animal.getDonorId());
 
             pstmt.executeUpdate();
         }
@@ -66,7 +67,7 @@ public class MySqlAnimalDao extends MySqlDao {
 
     // Update an animal
     public void updateAnimal(Animal animal) throws SQLException {
-        String sql = "UPDATE animal SET type = ?, breed = ?, name = ?, age = ?, " +
+        String sql = "UPDATE animal SET type = ?, breed = ?, name = ?, age = ?, weight = ?" +
                 "neutered = ?, health = ?, admitted = ?, gender = ? WHERE animal_id = ?";
 
         try (Connection conn = getConnection();
@@ -76,11 +77,12 @@ public class MySqlAnimalDao extends MySqlDao {
             pstmt.setString(2, animal.getBreed());
             pstmt.setString(3, animal.getName());
             pstmt.setInt(4, animal.getAge());
-            pstmt.setBoolean(5, animal.isNeutered());
-            pstmt.setString(6, animal.getHealth());
-            pstmt.setDate(7, Date.valueOf(animal.getAdmitted()));
-            pstmt.setString(8, animal.getGender());
-            pstmt.setInt(9, animal.getAnimalId());
+            pstmt.setFloat(5, animal.getWeight());
+            pstmt.setBoolean(6, animal.isNeutered());
+            pstmt.setString(7, animal.getHealth());
+            pstmt.setDate(8, Date.valueOf(animal.getAdmitted()));
+            pstmt.setString(9, animal.getGender());
+            pstmt.setInt(10, animal.getAnimalId());
 
             pstmt.executeUpdate();
         }

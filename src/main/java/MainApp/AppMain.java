@@ -2,6 +2,8 @@ package MainApp;
 
 import DTOs.Animal;
 import DAOs.MySqlAnimalDao;
+import Exceptions.DaoException;
+
 import java.util.List;
 import java.util.Scanner;
 import java.time.LocalDate;
@@ -34,11 +36,11 @@ public class AppMain {
              switch(input){
                  case 1 -> getAllAnimals();
                  case 2 -> getAnimalById();
-            //     case 3 -> deleteAnimal();
+                 case 3 -> deleteAnimal();
             //     case 4 -> addAnimal();
             //     case 5 -> updateAnimal();
             //     case 6 -> findAnimalByFilter();
-                 case 7 -> {
+                 case 4 -> {
                      System.out.println("Finished");
                      return;
                  }
@@ -76,6 +78,27 @@ public class AppMain {
             }
         } catch (SQLException e) {
             System.out.println("Error finding animal: " + e.getMessage());
+        }
+    }
+
+    private void deleteAnimal() {
+        System.out.print("Enter the Animal ID to delete: ");
+
+        int animalId;
+        try {
+            animalId = keyboard.nextInt();
+            keyboard.nextLine();
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter a valid numeric ID.");
+            keyboard.nextLine(); // Clear the buffer
+            return;
+        }
+
+        try {
+            animalDAO.deleteAnimal(animalId);
+            System.out.println("Animal deleted successfully.");
+        } catch (SQLException e) {
+            System.err.println("Error deleting animal: " + e.getMessage());
         }
     }
 }
