@@ -1,6 +1,7 @@
 package MainApp;
 
 import DAOs.AnimalDao;
+import DAOs.MySqlDonorDao;
 import DTOs.Animal;
 import DAOs.MySqlAnimalDao;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.sql.SQLException;
 
 public class AppMain {
     private MySqlAnimalDao animalDAO = new MySqlAnimalDao();
+    private MySqlDonorDao donorDAO = new MySqlDonorDao();
     private Scanner keyboard = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -38,7 +40,7 @@ public class AppMain {
                 case 3 -> deleteAnimal();
                 case 4 -> createAnimal();
                 case 5 -> updateById();
-                //     case 6 -> findAnimalByFilter();
+                case 6 -> filteringSecondName();
                 case 7 -> {
                     System.out.println("Finished");
                     return;
@@ -77,24 +79,6 @@ public class AppMain {
             }
         } catch (SQLException e) {
             System.out.println("Error finding animal: " + e.getMessage());
-        }
-    }
-
-    //Feature 5 - Update an existing Entity by ID - changing status of health of an animal
-    private void updateById() {
-        System.out.println("Enter animal ID: ");
-        int id = keyboard.nextInt();
-        keyboard.nextLine();
-
-        System.out.println("Update the animals health status: ");
-        String healthStatus = keyboard.nextLine();
-        keyboard.nextLine();
-
-        try {
-            animalDAO.updateHealth(healthStatus, id);
-            System.out.println("Updated the animals health status: " + healthStatus);
-        } catch (SQLException e) {
-            System.out.println("Error updating health");
         }
     }
 
@@ -170,4 +154,38 @@ public class AppMain {
             keyboard.nextLine();
         }
     }
+
+    //Feature 5 - Update an existing Entity by ID - changing status of health of an animal
+    private void updateById() {
+        System.out.println("Enter animal ID: ");
+        int id = keyboard.nextInt();
+        keyboard.nextLine();
+
+        System.out.println("Update the animals health status: ");
+        String healthStatus = keyboard.nextLine();
+        keyboard.nextLine();
+
+        try {
+            animalDAO.updateHealth(healthStatus, id);
+            System.out.println("Updated the animals health status: " + healthStatus);
+        } catch (SQLException e) {
+            System.out.println("Error updating health");
+        }
+    }
+
+    //Feature 6 - Get list of entities matching a filter (based on DTO object) - Filtering Donor second names
+    private void filteringSecondName() {
+        System.out.println("Enter name you want to filter: ");
+        String name = keyboard.nextLine();
+        keyboard.nextLine();
+
+        try {
+            donorDAO.filteringSecondName(name);
+            System.out.println("Filtering out the name " + name);
+        } catch (SQLException e) {
+            System.out.println("Error filtering name " + e.getMessage());
+        }
+    }
 }
+
+
