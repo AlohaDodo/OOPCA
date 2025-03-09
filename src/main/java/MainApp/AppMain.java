@@ -47,19 +47,21 @@ public class AppMain {
         }
     }
 
+    //Feature 1
     private void getAllAnimals() {
         try {
-            List<Animal> animals = animalDAO.getAllAnimals();
-            if (animals.isEmpty()) {
+            List<Animal> animal = animalDAO.getAllAnimals();
+            if (animal.isEmpty()) {
                 System.out.println("No animals found.");
             } else {
-                animals.forEach(System.out::println);
+                animal.forEach(System.out::println);
             }
         } catch (SQLException e) {
             System.out.println("Error retrieving animals: " + e.getMessage());
         }
     }
 
+    //Feature 2
     private void getAnimalById() {
         System.out.println("Enter animal ID: ");
         int id = keyboard.nextInt();

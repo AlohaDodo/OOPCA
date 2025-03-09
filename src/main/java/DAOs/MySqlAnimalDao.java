@@ -10,7 +10,7 @@ public class MySqlAnimalDao extends MySqlDao {
 
     // Create a new animal record
     public void createAnimal(Animal animal) throws SQLException {
-        String sql = "INSERT INTO animals (animal_id, type, breed, name, age, neutered, health, admitted, gender, donorId) " +
+        String sql = "INSERT INTO animal (animal_id, type, breed, name, age, neutered, health, admitted, gender, donorId) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = getConnection();
@@ -106,6 +106,7 @@ public class MySqlAnimalDao extends MySqlDao {
                 rs.getString("breed"),
                 rs.getString("name"),
                 rs.getInt("age"),
+                rs.getFloat("weight"),
                 rs.getBoolean("neutered"),
                 rs.getString("health"),
                 rs.getDate("admitted").toLocalDate(),

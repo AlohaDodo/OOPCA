@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MySqlDao {
-    private String url = "jdbc:mysql://localhost:3306/user_database";
+    private String url = "jdbc:mysql://localhost:3306/animal_shelter";
     private String username = "root";
     private String password = "";
 

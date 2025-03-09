@@ -8,18 +8,20 @@ public class Animal {
     private String breed;
     private String name;
     private int age;
+    private float weight;
     private boolean neutered;
     private String health;
     private LocalDate admitted;
     private String gender;
     private int donorId;
 
-    public Animal(int animalId, String type, String breed, String name, int age, boolean neutered, String health, LocalDate admitted, String gender, int donorId) {
+    public Animal(int animalId, String type, String breed, String name, int age, float weight, boolean neutered, String health, LocalDate admitted, String gender, int donorId) {
         this.animalId = animalId;
         this.type = type;
         this.breed = breed;
         this.name = name;
         this.age = age;
+        this.weight = weight;
         this.neutered = neutered;
         this.health = health;
         this.admitted = admitted;
@@ -70,6 +72,10 @@ public class Animal {
         this.age = age;
     }
 
+    public float getWeight() { return  weight; }
+
+    public void setWeight(float weight) { this.weight = weight; }
+
     public boolean isNeutered() {
         return neutered;
     }
@@ -118,6 +124,7 @@ public class Animal {
                 ", breed='" + breed + '\'' +
                 ", name='" + name + '\'' +
                 ", age=" + age +
+                ", weight=" + weight +
                 ", neutered=" + neutered +
                 ", health='" + health + '\'' +
                 ", admitted=" + admitted +
