@@ -88,7 +88,7 @@ public class MySqlAnimalDao extends MySqlDao {
 
     // Delete an animal
     public void deleteAnimal(int animalId) throws SQLException {
-        String sql = "DELETE FROM animal WHERE animal_id = ?";
+        String sql = "DELETE FROM animal WHERE id = ?";
 
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -113,5 +113,18 @@ public class MySqlAnimalDao extends MySqlDao {
                 rs.getString("gender"),
                 rs.getInt("donor_id")
         );
+    }
+
+    //Update animals health status - Feature 5
+    public Animal updateHealth(String newHealth, int animalId) throws SQLException {
+        String sql = "UPDATE animal SET health = ? WHERE id = ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, newHealth);
+            pstmt.setInt(2, animalId);
+            pstmt.executeUpdate();
+        }
+        return null;
     }
 }
