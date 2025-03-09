@@ -37,10 +37,10 @@ public class AppMain {
                  case 1 -> getAllAnimals();
                  case 2 -> getAnimalById();
                  case 3 -> deleteAnimal();
-            //     case 4 -> addAnimal();
+                 case 4 -> createAnimal();
             //     case 5 -> updateAnimal();
             //     case 6 -> findAnimalByFilter();
-                 case 4 -> {
+                 case 7 -> {
                      System.out.println("Finished");
                      return;
                  }
@@ -83,14 +83,13 @@ public class AppMain {
 
     private void deleteAnimal() {
         System.out.print("Enter the Animal ID to delete: ");
-
         int animalId;
         try {
             animalId = keyboard.nextInt();
             keyboard.nextLine();
         } catch (Exception e) {
             System.out.println("Invalid input. Please enter a valid numeric ID.");
-            keyboard.nextLine(); // Clear the buffer
+            keyboard.nextLine();
             return;
         }
 
@@ -99,6 +98,56 @@ public class AppMain {
             System.out.println("Animal deleted successfully.");
         } catch (SQLException e) {
             System.err.println("Error deleting animal: " + e.getMessage());
+        }
+    }
+
+    private void createAnimal(){
+        try {
+            System.out.print("Enter Animal ID: ");
+            int animalId = keyboard.nextInt();
+            keyboard.nextLine();
+
+            System.out.print("Enter Type: ");
+            String type = keyboard.nextLine();
+
+            System.out.print("Enter Breed: ");
+            String breed = keyboard.nextLine();
+
+            System.out.print("Enter Name: ");
+            String name = keyboard.nextLine();
+
+            System.out.print("Enter Age: ");
+            int age = keyboard.nextInt();
+
+            System.out.print("Enter Weight: ");
+            float weight = keyboard.nextFloat();
+
+            System.out.print("Is the animal neutered? (true/false): ");
+            boolean neutered = keyboard.nextBoolean();
+            keyboard.nextLine();
+
+            System.out.print("Enter Health Status: ");
+            String health = keyboard.nextLine();
+
+            System.out.print("Enter Admission Date (YYYY-MM-DD): ");
+            LocalDate admitted = LocalDate.parse(keyboard.nextLine());
+
+            System.out.print("Enter Gender (M/F): ");
+            String gender = keyboard.nextLine();
+
+            System.out.print("Enter Donor ID: ");
+            int donorId = keyboard.nextInt();
+            keyboard.nextLine();
+
+            Animal animal = new Animal(animalId, type, breed, name, age, weight, neutered, health, admitted, gender, donorId);
+            animalDAO.createAnimal(animal);
+            System.out.println("Animal created successfully!");
+
+        } catch (SQLException e) {
+            System.err.println("Error creating animal: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Invalid input. Please try again.");
+            keyboard.nextLine();
         }
     }
 }
