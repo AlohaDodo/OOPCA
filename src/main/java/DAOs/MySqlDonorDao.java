@@ -10,7 +10,7 @@ public class MySqlDonorDao extends MySqlDao implements DonorDao {
 
     @Override
     public void createDonor(Donor donor) throws SQLException {
-        String sql = "INSERT INTO donors (donor_id, first_name, second_name, tele_number) " +
+        String sql = "INSERT INTO donor (donor_id, first_name, second_name, tele_number) " +
                     "VALUES (?, ?, ?, ?)";
         
         try (Connection conn = getConnection();
@@ -25,7 +25,7 @@ public class MySqlDonorDao extends MySqlDao implements DonorDao {
 
     @Override
     public Donor getDonorById(int donorId) throws SQLException {
-        String sql = "SELECT * FROM donors WHERE donor_id = ?";
+        String sql = "SELECT * FROM donor WHERE donor_id = ?";
         
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -40,7 +40,7 @@ public class MySqlDonorDao extends MySqlDao implements DonorDao {
 
     @Override
     public List<Donor> getAllDonors() throws SQLException {
-        String sql = "SELECT * FROM donors";
+        String sql = "SELECT * FROM donor";
         List<Donor> donors = new ArrayList<>();
         
         try (Connection conn = getConnection();
@@ -55,7 +55,7 @@ public class MySqlDonorDao extends MySqlDao implements DonorDao {
 
     @Override
     public void updateDonor(Donor donor) throws SQLException {
-        String sql = "UPDATE donors SET first_name = ?, second_name = ?, tele_number = ? " +
+        String sql = "UPDATE donor SET first_name = ?, second_name = ?, tele_number = ? " +
                     "WHERE donor_id = ?";
         
         try (Connection conn = getConnection();
@@ -70,7 +70,7 @@ public class MySqlDonorDao extends MySqlDao implements DonorDao {
 
     @Override
     public void deleteDonor(int donorId) throws SQLException {
-        String sql = "DELETE FROM donors WHERE donor_id = ?";
+        String sql = "DELETE FROM donor WHERE donor_id = ?";
         
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -81,7 +81,7 @@ public class MySqlDonorDao extends MySqlDao implements DonorDao {
 
     private Donor extractDonorFromResultSet(ResultSet rs) throws SQLException {
         return new Donor(
-            rs.getInt("donor_id"),
+            rs.getInt("id"),
             rs.getString("first_name"),
             rs.getString("second_name"),
             rs.getString("tele_number")

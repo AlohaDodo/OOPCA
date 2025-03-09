@@ -33,7 +33,7 @@ public class MySqlAnimalDao extends MySqlDao {
 
     // Read an animal by ID
     public Animal getAnimalById(int animalId) throws SQLException {
-        String sql = "SELECT * FROM animals WHERE animal_id = ?";
+        String sql = "SELECT * FROM animal WHERE animal_id = ?";
 
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -50,7 +50,7 @@ public class MySqlAnimalDao extends MySqlDao {
 
     // Read all animals
     public List<Animal> getAllAnimals() throws SQLException {
-        String sql = "SELECT * FROM animals";
+        String sql = "SELECT * FROM animal";
         List<Animal> animals = new ArrayList<>();
 
         try (Connection conn = getConnection();
@@ -66,7 +66,7 @@ public class MySqlAnimalDao extends MySqlDao {
 
     // Update an animal
     public void updateAnimal(Animal animal) throws SQLException {
-        String sql = "UPDATE animals SET type = ?, breed = ?, name = ?, age = ?, " +
+        String sql = "UPDATE animal SET type = ?, breed = ?, name = ?, age = ?, " +
                 "neutered = ?, health = ?, admitted = ?, gender = ? WHERE animal_id = ?";
 
         try (Connection conn = getConnection();
@@ -88,7 +88,7 @@ public class MySqlAnimalDao extends MySqlDao {
 
     // Delete an animal
     public void deleteAnimal(int animalId) throws SQLException {
-        String sql = "DELETE FROM animals WHERE animal_id = ?";
+        String sql = "DELETE FROM animal WHERE animal_id = ?";
 
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -101,7 +101,7 @@ public class MySqlAnimalDao extends MySqlDao {
     // Helper method to extract Animal from ResultSet
     private Animal extractAnimalFromResultSet(ResultSet rs) throws SQLException {
         return new Animal(
-                rs.getInt("animal_id"),
+                rs.getInt("id"),
                 rs.getString("type"),
                 rs.getString("breed"),
                 rs.getString("name"),
@@ -111,7 +111,7 @@ public class MySqlAnimalDao extends MySqlDao {
                 rs.getString("health"),
                 rs.getDate("admitted").toLocalDate(),
                 rs.getString("gender"),
-                rs.getInt("donorId")
+                rs.getInt("donor_id")
         );
     }
 }
