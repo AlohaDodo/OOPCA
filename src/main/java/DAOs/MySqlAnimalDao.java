@@ -33,7 +33,7 @@ public class MySqlAnimalDao extends MySqlDao {
 
     // Read an animal by ID
     public Animal getAnimalById(int animalId) throws SQLException {
-        String sql = "SELECT * FROM animal WHERE animal_id = ?";
+        String sql = "SELECT * FROM animal WHERE id = ?";
 
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
