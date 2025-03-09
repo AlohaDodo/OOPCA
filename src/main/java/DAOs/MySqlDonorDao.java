@@ -84,7 +84,26 @@ public class MySqlDonorDao extends MySqlDao implements DonorDao {
             rs.getInt("id"),
             rs.getString("first_name"),
             rs.getString("second_name"),
-            rs.getString("tele_number")
+            rs.getString("telenumber")
         );
     }
+
+    public Donor filteringSecondName(String secondName) throws SQLException {
+        String sql = "SELECT * FROM donor WHERE second_name LIKE ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, "%" + secondName + "%");
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return extractDonorFromResultSet(rs);
+            }
+        }
+        return null;
+    }
 }
+
+
+
+
