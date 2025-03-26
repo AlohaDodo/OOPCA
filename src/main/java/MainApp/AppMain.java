@@ -173,19 +173,35 @@ public class AppMain {
         }
     }
 
-    //Feature 6 - Get list of entities matching a filter (based on DTO object) - Filtering Donor second names
+    //Feature 6 - Get list of entities matching a filter (based on DTO object) - Filtering Donor second names //2-3 different things small menu
     private void filteringSecondName() {
-        System.out.println("Enter name you want to filter: ");
-        String name = keyboard.nextLine();
+        System.out.println("Enter number of the thing you want to filter");
+        System.out.println("1: Donor Second name");
+        System.out.println("2: Animal type");
+        int number = keyboard.nextInt();
         keyboard.nextLine();
 
-        try {
-            donorDAO.filteringSecondName(name);
-            System.out.println("Filtering out the name " + name);
-        } catch (SQLException e) {
-            System.out.println("Error filtering name " + e.getMessage());
+        //If user chooses to filter our Donor's second names - This won't print out can someone look over it xx
+        if (number == 1) {
+            System.out.println("You have chosen to filter out donor's second name.");
+            System.out.println("Please enter the name you want to filer out");
+            String secondName = keyboard.nextLine();
+
+            try {
+                donorDAO.filtersecondName(secondName);
+                System.out.println("Filtered donors second names");
+            } catch (SQLException e) {
+                System.out.println("Error filtering donor second names");
+            }
         }
+
+        //If user chooses to filter out animal types - for example : wanting to filter out Dog/Cat - Dorota will complete this at the end to not waste anymore time
+        if (number == 2) {
+            System.out.println("You have chosen to filter out animal types");
+        }
+
     }
+
 }
 
 

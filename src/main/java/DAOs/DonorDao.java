@@ -11,4 +11,6 @@ public interface DonorDao {
     List<Donor> getAllDonors() throws SQLException;
     void updateDonor(Donor donor) throws SQLException;
     void deleteDonor(int donorId) throws SQLException;
+    void getDonorBySecondName(String secondName) throws SQLException;
+    List<Donor> filtersecondName(String secondName) throws SQLException;
 }
