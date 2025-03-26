@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import DTOs.Animal;
 import DTOs.Donor;
 
 public class MySqlDonorDao extends MySqlDao implements DonorDao {
@@ -79,6 +80,17 @@ public class MySqlDonorDao extends MySqlDao implements DonorDao {
         }
     }
 
+    @Override
+    public void getDonorBySecondName(String donorSecondName) throws SQLException {
+        String sql = "SELECT * FROM donor WHERE second_name = ?";
+
+        try (Connection conn = getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, donorSecondName);
+            ResultSet rs = pstmt.executeQuery();
+        }
+    }
+
     private Donor extractDonorFromResultSet(ResultSet rs) throws SQLException {
         return new Donor(
                 rs.getInt("id"),
@@ -88,18 +100,24 @@ public class MySqlDonorDao extends MySqlDao implements DonorDao {
         );
     }
 
-    public Donor filteringSecondName(String secondName) throws SQLException {
-        String sql = "SELECT * FROM donor WHERE second_name LIKE ?";
+    public List<Donor> filtersecondName(String secondName) throws SQLException {
+        String query = "SELECT * FROM donor WHERE second_name LIKE ?";
+        List<Donor> donorSecondNames = new ArrayList<>();
 
-        try (Connection conn = getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, "%" + secondName + "%");
+        try {
+            Connection conn = getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, secondName);
+            System.out.println(pstmt.toString());
             ResultSet rs = pstmt.executeQuery();
 
-            if (rs.next()) {
-                return extractDonorFromResultSet(rs);
+            while (rs.next()) {
+                donorSecondNames.add(extractDonorFromResultSet(rs));
             }
+            return donorSecondNames;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-        return null;
     }
+
 }
