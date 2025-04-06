@@ -12,4 +12,5 @@ public interface AnimalDao {
     List<Animal> getAllAnimals() throws SQLException;
     void updateAnimal(Animal animal) throws SQLException;
     void deleteAnimal(int animalId) throws DaoException;
+    List<Animal> getAnimalByType() throws SQLException;
 }

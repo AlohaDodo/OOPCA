@@ -1,5 +1,7 @@
 package DTOs;
 
+import org.json.JSONObject;
+
 public class Donor {
     private int donorId;
     private String firstName;
@@ -11,6 +13,16 @@ public class Donor {
         this.firstName = firstName;
         this.secondName = secondName;
         this.teleNumber = teleNumber;
+    }
+
+    //Json feature 7
+    public JSONObject toJSONDonor() {
+        JSONObject json = new JSONObject();
+        json.put("donorId", donorId);
+        json.put("firstName", firstName);
+        json.put("secondName", secondName);
+        json.put("teleNumber", teleNumber);
+        return json;
     }
 
     public Donor() {

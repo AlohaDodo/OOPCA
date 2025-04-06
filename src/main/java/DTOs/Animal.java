@@ -1,6 +1,7 @@
 package DTOs;
 
 import java.time.LocalDate;
+import org.json.JSONObject;
 
 public class Animal {
     private int animalId;
@@ -27,6 +28,23 @@ public class Animal {
         this.admitted = admitted;
         this.gender = gender;
         this.donorId = donorId;
+    }
+
+    //JSON Feature 7
+    public JSONObject JSONAnimal() {
+        JSONObject json = new JSONObject();
+        json.put("id", animalId);
+        json.put("type", type);
+        json.put("breed", breed);
+        json.put("name", name);
+        json.put("age", age);
+        json.put("weight", weight);
+        json.put("neutered", neutered);
+        json.put("health", health);
+        json.put("admitted", admitted.toString());
+        json.put("gender", gender);
+        json.put("donorId", donorId);
+        return json;
     }
 
     public Animal() {

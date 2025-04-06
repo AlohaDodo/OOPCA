@@ -85,7 +85,7 @@ public class MySqlDonorDao extends MySqlDao implements DonorDao {
         String sql = "SELECT * FROM donor WHERE second_name = ?";
 
         try (Connection conn = getConnection();
-        PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, donorSecondName);
             ResultSet rs = pstmt.executeQuery();
         }
@@ -100,6 +100,7 @@ public class MySqlDonorDao extends MySqlDao implements DonorDao {
         );
     }
 
+    //Feature 6 - Filtering out second names from database
     public List<Donor> filtersecondName(String secondName) throws SQLException {
         String query = "SELECT * FROM donor WHERE second_name LIKE ?";
         List<Donor> donorSecondNames = new ArrayList<>();
@@ -108,13 +109,13 @@ public class MySqlDonorDao extends MySqlDao implements DonorDao {
             Connection conn = getConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, secondName);
-            System.out.println(pstmt.toString());
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 donorSecondNames.add(extractDonorFromResultSet(rs));
             }
             return donorSecondNames;
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
