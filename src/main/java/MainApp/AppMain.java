@@ -1,6 +1,7 @@
 package MainApp;
 
 import DAOs.AnimalDao;
+import DAOs.DonorDao;
 import DAOs.MySqlDonorDao;
 import DTOs.Animal;
 import DAOs.MySqlAnimalDao;
@@ -8,6 +9,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.sql.SQLException;
+import DTOs.Donor;
+
 
 public class AppMain {
     private MySqlAnimalDao animalDAO = new MySqlAnimalDao();
@@ -23,11 +26,11 @@ public class AppMain {
             System.out.println("Welcome to our Animal Shelter");
             System.out.println("Menu:");
             System.out.println("1) Display all animals");
-            System.out.println("2) Find animal");
+            System.out.println("2) Find animal by ID");
             System.out.println("3) Delete animal");
             System.out.println("4) Add animal");
             System.out.println("5) Update animal's health status");
-            System.out.println("6) Get list of animals based by a Filter");
+            System.out.println("6) Filter Donor by second name OR Filter animal types");
             System.out.println("7) Exit");
             System.out.println("\n Enter your input: ");
 
@@ -181,27 +184,43 @@ public class AppMain {
         int number = keyboard.nextInt();
         keyboard.nextLine();
 
-        //If user chooses to filter our Donor's second names - This won't print out can someone look over it xx
+        //If user chooses to filter our Donor's second names - for example : filtering out Doyle 2 results should show
         if (number == 1) {
             System.out.println("You have chosen to filter out donor's second name.");
             System.out.println("Please enter the name you want to filer out");
             String secondName = keyboard.nextLine();
 
             try {
-                donorDAO.filtersecondName(secondName);
-                System.out.println("Filtered donors second names");
+                List<Donor> list = donorDAO.filtersecondName(secondName);
+                System.out.println("Filtered donors second names" +list);
             } catch (SQLException e) {
                 System.out.println("Error filtering donor second names");
             }
         }
 
-        //If user chooses to filter out animal types - for example : wanting to filter out Dog/Cat - Dorota will complete this at the end to not waste anymore time
+        //If user chooses to filter out animal types - for example : wanting to filter out Dog/Cat
         if (number == 2) {
             System.out.println("You have chosen to filter out animal types");
+            System.out.println("Please enter the animal type you want to filter out");
+            String animalType = keyboard.next();
+
+            try {
+                List<Animal> list = animalDAO.getAnimalByType(animalType);
+                System.out.println("Filtered the animal type");
+                if (list.isEmpty()) {
+                    System.out.println("No animals found.");
+                } else {
+                    list.forEach(System.out::println);
+                }
+            } catch (SQLException e) {
+                System.out.println("Error filtering out animal types");
+            }
         }
+
+        //Feature 7 - Converting list to JSON - using examples on moodle
+
+
 
     }
 
 }
-
-
