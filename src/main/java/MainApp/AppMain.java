@@ -10,6 +10,7 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.sql.SQLException;
 import DTOs.Donor;
+import JSON.Animals.JSONConverter;
 
 
 public class AppMain {
@@ -31,7 +32,8 @@ public class AppMain {
             System.out.println("4) Add animal");
             System.out.println("5) Update animal's health status");
             System.out.println("6) Filter Donor by second name OR Filter animal types");
-            System.out.println("7) Exit");
+            System.out.println("7) Convert list of animals into JSON String");
+            System.out.println("8) Exit");
             System.out.println("\n Enter your input: ");
 
             int input = keyboard.nextInt();
@@ -44,7 +46,8 @@ public class AppMain {
                 case 4 -> createAnimal();
                 case 5 -> updateById();
                 case 6 -> filteringSecondName();
-                case 7 -> {
+                case 7 -> convertListToJson();
+                case 8 -> {
                     System.out.println("Finished");
                     return;
                 }
@@ -192,7 +195,7 @@ public class AppMain {
 
             try {
                 List<Donor> list = donorDAO.filtersecondName(secondName);
-                System.out.println("Filtered donors second names" +list);
+                System.out.println("Filtered donors second names" + list);
             } catch (SQLException e) {
                 System.out.println("Error filtering donor second names");
             }
@@ -216,11 +219,27 @@ public class AppMain {
                 System.out.println("Error filtering out animal types");
             }
         }
-
-        //Feature 7 - Converting list to JSON - using examples on moodle
-
-
-
     }
 
+    //Feature 7 - Converting list to JSON - using examples on moodle
+    private void convertListToJson() {
+        try{
+            //Getting all animals
+            List<Animal> animals = animalDAO.getAllAnimals();
+            //Checking if the list is empty or not
+            if (animals.isEmpty()) {
+                System.out.println("No animals found.");
+            }
+            //if there is contents in the list
+            else {
+                //takes the list into the method
+                String animalJson = animalDAO.animalListToJson(animals);
+                System.out.println(animalJson);
+            }
+        }
+        catch (Exception e) {
+            System.out.println("Error converting animals to JSON");
+        }
+    }
 }
+
