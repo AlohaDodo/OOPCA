@@ -1,7 +1,5 @@
 package MainApp;
 
-import DAOs.AnimalDao;
-import DAOs.DonorDao;
 import DAOs.MySqlDonorDao;
 import DTOs.Animal;
 import DAOs.MySqlAnimalDao;
@@ -10,8 +8,6 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.sql.SQLException;
 import DTOs.Donor;
-import JSON.Animals.JSONConverter;
-
 
 public class AppMain {
     private MySqlAnimalDao animalDAO = new MySqlAnimalDao();
@@ -232,8 +228,8 @@ public class AppMain {
             }
             //if there is contents in the list
             else {
-                //takes the list into the method
-                String animalJson = animalDAO.animalListToJson(animals);
+                //takes the animal list into the method
+                String animalJson = Animal.animalListToJson(animals);
                 System.out.println(animalJson);
             }
         }

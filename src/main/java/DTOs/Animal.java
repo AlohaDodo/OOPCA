@@ -1,20 +1,23 @@
 package DTOs;
 
 import java.time.LocalDate;
+import java.util.List;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Animal {
-    private int animalId;
-    private String type;
-    private String breed;
-    private String name;
-    private int age;
-    private float weight;
-    private boolean neutered;
-    private String health;
-    private LocalDate admitted;
-    private String gender;
-    private int donorId;
+    private static int animalId;
+    private static String type;
+    private static String breed;
+    private static String name;
+    private static int age;
+    private static float weight;
+    private static boolean neutered;
+    private static String health;
+    private static LocalDate admitted;
+    private static String gender;
+    private static int donorId;
 
     public Animal(int animalId, String type, String breed, String name, int age, float weight, boolean neutered, String health, LocalDate admitted, String gender, int donorId) {
         this.animalId = animalId;
@@ -30,8 +33,23 @@ public class Animal {
         this.donorId = donorId;
     }
 
-    //JSON Feature 7
-    public JSONObject JSONAnimal() {
+
+    //Feature 7 - Convert List of Entities to a JSON String
+    //Creating method
+    public static String animalListToJson(List<Animal> animals) {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+
+        for(Animal animal : animals) {
+            jsonArray.put(convertToJSONObject(animals));
+        }
+
+        //Output
+        jsonObject.put("animals", jsonArray);
+        return jsonObject.toString();
+    }
+
+    public static JSONObject convertToJSONObject (List<Animal> animals) {
         JSONObject json = new JSONObject();
         json.put("id", animalId);
         json.put("type", type);

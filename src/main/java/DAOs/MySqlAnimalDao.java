@@ -1,12 +1,9 @@
 package DAOs;
 
 import DTOs.Animal;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import DTOs.Donor;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -140,19 +137,6 @@ public class MySqlAnimalDao extends MySqlDao {
 
     }
 
-    //Feature 7 - Convert List of Entities to a JSON String
-    //Creating method
-    public static String animalListToJson(List<Animal> animals) {
-        //New array for the JSON
-        JSONArray jsonAnimals = new JSONArray();
-
-        //For every animal in the array it transforms it into the JSON
-        for (Animal animal : animals) {
-            JSONObject jsonAnimal = new JSONObject();
-        }
-        //Returning the json as a string
-        return jsonAnimals.toString();
-    }
 }
 
 
